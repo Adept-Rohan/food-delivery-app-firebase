@@ -5,11 +5,28 @@ import RowContainer from "./RowContainer";
 import { useStateValue } from "../context/StateProvider";
 import MenuContainer from "./MenuContainer";
 import CartContainer from "./CartContainer";
+import { getAllFoodItems } from "../utils/firebasefunction";
 
 const MainContainer = () => {
-    const [{ foodItems, cartShow }, dispatch] = useStateValue();
-    console.log("🚀 ~ MainContainer ~ foodItems:", foodItems)
+    const [{ cartShow }] = useStateValue();
+
+    const [food, setFood] = useState(null)
+
+    useEffect(() => {
+        const fetchFoodItems = async () => {
+            const foodData = await getAllFoodItems();
+            console.log("🚀 ~ fetchFoodItems ~ foodData:", foodData.filter((food)=> food.category === 'fruits'))
+            setFood(foodData.filter((food)=> food.category === 'fruits'))
+        };
+
+        fetchFoodItems();
+    }, []);
+
+
+
     const [scrollValue, setScrollValue] = useState(0);
+
+
 
     useEffect(() => { }, [scrollValue, cartShow]);
 
@@ -41,7 +58,7 @@ const MainContainer = () => {
                 <RowContainer
                     scrollValue={scrollValue}
                     flag={true}
-                    data={foodItems?.filter((n) => n.category === "fruits")}
+                    data={food}
                 />
             </section>
 

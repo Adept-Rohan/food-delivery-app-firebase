@@ -6,6 +6,8 @@ export const actionType = {
 };
 
 const reducer = (state, action) => {
+    console.log("🚀 ~ reducer ~ state:", state)
+    console.log("🚀 ~ reducer ~ action:", action)
     // console.log(action);
 
     switch (action.type) {

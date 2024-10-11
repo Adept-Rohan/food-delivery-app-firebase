@@ -16,6 +16,7 @@ const Header = () => {
     const provider = new GoogleAuthProvider();
 
     const [{ user, cartShow, cartItems }, dispatch] = useStateValue();
+    console.log("🚀 ~ Header ~ user:", user)
 
     const [isMenu, setIsMenu] = useState(false);
 
