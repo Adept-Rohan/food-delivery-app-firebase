@@ -3,12 +3,25 @@ import { IoFastFood } from "react-icons/io5";
 import { categories } from "../utils/data";
 import { motion } from "framer-motion";
 import RowContainer from "./RowContainer";
-import { useStateValue } from "../context/StateProvider";
+import { getAllFoodItems } from "../utils/firebasefunction";
 
 const MenuContainer = () => {
     const [filter, setFilter] = useState("chicken");
 
-    const [{ foodItems }, dispatch] = useStateValue();
+  
+
+    const [food, setFood] = useState(null)
+    console.log("🚀 ~ MenuContainer ~ food:", food)
+
+    useEffect(() => {
+        const fetchFoodItems = async () => {
+            const foodData = await getAllFoodItems();
+         
+            setFood(foodData)
+        };
+
+        fetchFoodItems();
+    }, []);
 
     return (
         <section className="w-full my-6" id="menu">
@@ -55,7 +68,7 @@ const MenuContainer = () => {
                 <div className="w-full">
                     <RowContainer
                         flag={false}
-                        data={foodItems?.filter((n) => n.category == filter)}
+                        data={food?.filter((n) => n.category == filter)}
                     />
                 </div>
             </div>

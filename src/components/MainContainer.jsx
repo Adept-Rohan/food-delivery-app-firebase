@@ -22,11 +22,7 @@ const MainContainer = () => {
         fetchFoodItems();
     }, []);
 
-
-
     const [scrollValue, setScrollValue] = useState(0);
-
-
 
     useEffect(() => { }, [scrollValue, cartShow]);
 
