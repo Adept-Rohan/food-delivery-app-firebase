@@ -8,6 +8,7 @@ import CartContainer from "./CartContainer";
 
 const MainContainer = () => {
     const [{ foodItems, cartShow }, dispatch] = useStateValue();
+    console.log("🚀 ~ MainContainer ~ foodItems:", foodItems)
     const [scrollValue, setScrollValue] = useState(0);
 
     useEffect(() => { }, [scrollValue, cartShow]);
